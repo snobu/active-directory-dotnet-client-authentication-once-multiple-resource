@@ -46,6 +46,8 @@ namespace ConsoleApplication1
         private static async Task<AuthenticationResult> GetManagementAccessResult(string refreshToken)
         {
             var authenticationContext = new AuthenticationContext(string.Format("https://login.microsoftonline.com/{0}/", SubscriptionTenant));
+            // Before going any further read this post -
+            // http://www.cloudidentity.com/blog/2015/08/13/adal-3-didnt-return-refresh-tokens-for-5-months-and-nobody-noticed/
             var result = authenticationContext.AcquireTokenByRefreshToken(refreshToken, NativeClientId, "https://management.azure.com/");
 
             if (result == null)
